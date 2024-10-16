@@ -23,3 +23,5 @@ ifconfig eth0 hw ether <new ether address>
 ifconfig eth0 up
 
 eth0 can be swithced with whatever network device u want (ex: eth0, wlan0 etc)
+
+Using Pytex.org is great when writing regex, to check what regex expression to use in your program.
