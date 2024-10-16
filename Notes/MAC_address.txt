@@ -1,0 +1,25 @@
+MAC Address
+
+Media Access Control
+    - Permanent
+    - Physical
+    - Unique
+
+Assigned by manufacturer
+
+Unique MAC address on a network device
+
+Changing MAC address:
+    - Makes you anonymous
+    - Impersonate other devices
+    - Bypass filters
+
+How to change MAC address manually:
+
+--> commands:
+ifconfig
+ifconfig eth0 down
+ifconfig eth0 hw ether <new ether address>
+ifconfig eth0 up
+
+eth0 can be swithced with whatever network device u want (ex: eth0, wlan0 etc)
