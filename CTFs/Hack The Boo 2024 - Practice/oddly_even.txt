@@ -1,0 +1,19 @@
+Oddly Even
+Take in a number, print "odd" if odd and "even" if even.
+
+Python code, just check for even or odd number, do this with modulo C:
+
+Code:
+# take in the number
+n = int(input())
+
+# calculate answer
+if n % 2 == 0:
+    answer = 'even'
+else:
+    answer = 'odd'
+
+# print answer
+print(answer)
+
+FLAG: HTB{15_iT_0dD_oR_Is_iT_n0t?_3d48043800ef2a900237cc5f3a295c55}

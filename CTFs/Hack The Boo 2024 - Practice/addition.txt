@@ -1,0 +1,16 @@
+Addition
+Two ancient runes hold hidden powers. Combine them to unlock the sum and reveal their secret.
+
+Python coding, very simple Addition
+
+Code:
+# take in the number
+a = int(input())
+b = int(input())
+# calculate answer
+answer = a + b
+
+# print answer
+print(answer)
+
+FLAG: HTB{aDd1nG_4lL_tH3_waY_38013380042fa4152c2b2b79e3e9b748}
