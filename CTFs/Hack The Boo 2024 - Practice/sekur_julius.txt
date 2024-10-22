@@ -1,0 +1,31 @@
+sekur julius
+Hidden deep in the forest was an ancient scroll, rumored to grant immense power to anyone who could read its shifting symbols. On Halloween, a curious traveler found the scroll, its letters strangely out of order. As they deciphered the message, the words slowly rearranged themselves, revealing a dark spell. But with the final shift, the traveler felt a cold presence behind them, whispering, "You were never meant to understand." The forest grew silent, but the spell was already cast.
+
+Since this is a crypto challenge and named julius, i'm already thinking that this is a ceasar cipher C:
+The Ceasar Cipher is a substitution cipher, which changes one character to another.
+Downloading the content of the CTF flag, and there it is, the beautiful Python code with encrypt and decrypt functions.
+Now notice the key is a random number between 1, 1337.
+So we gotta find the key to decrypt the message.
+
+Code:
+def cesars_chipher(string: str, shift: int = 3) -> str:
+    abc = 'abcdefghijklmnopqrstuvwxyz'.upper()
+    return "".join([abc[(abc.find(c) + shift) % 26] for c in string])
+
+s = 'LTARDBT0ID0WPRZIWTQDD0ILDIWDJHPCSILTCINUDJG!0IWXH0XH0P0EGDDU0DU0RDCRTEI0ID0EGDKT0NDJ0IWPI0IWT0RPTHPG0RXEWTG0XH0XCHTRJGT0CD0BPIITG0WDL0BPCN0IXBTH0NDJ0PEEAN0XI.0IWT0HTRJGXIN0DU0P0IWDJHPCS0SXHIXCRI0HWXUIH0XH0TKTCIJPAAN0IWT0HPBT0PH0IWPI0DU0P0HXCVAT0HWXUI.0TCDJVW0BJBQAXCV,0IPZT0NDJG0UAPV0PCS0TCYDN0IWT0GTHI0DU0IWT0RDCITHI.0BPZT0HJGT0NDJ0LGPE0IWT0UDAADLXCV0ITMI0LXIW0IWT0WIQ0UAPV0UDGBPI0HTRJGXINDUPIWDJHPCSDGHTRJGXINDUPHXCVAT.'
+
+for decrypt_key in range(1,1337):
+    decrypted_text = cesars_chipher(s, decrypt_key)
+    if 'HTB' in decrypted_text :
+        decrypted_text = decrypted_text.replace('K', ' ')
+        with open('decrypted_text.txt', 'w') as f:
+            f.write(decrypted_text)
+
+s variable is the string with the encrypted message, now i wrap my function in a for loop, to find the key
+After i've found the key, i scroll around the output file, and see that there are HTB within the text.
+I make a control statement, that if the decrypted message has HTB within it, then 
+I should replace the 'K' within that string with space. 
+You will see this is you debug ur code while coding or you can use print() to see what your current decrypted message is
+And then i just write the decrypted message to a file, read from it, and at the end i find the flag
+
+FLAG: HTB{SECURITYOFATHOUSANDORSECURITYOFASINGLE}

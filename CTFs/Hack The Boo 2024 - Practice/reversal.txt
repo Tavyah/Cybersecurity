@@ -1,3 +1,20 @@
 Reversal
 A dark incantation was written backward in a spellbook. Reverse the cursed words to reveal their true meaning.
 
+Python code
+Reverse the string entered
+
+First you need to make sure that the input is a string and not an integer (int)
+Then you reverse the string with slicing
+
+Code:
+# take in the number
+n = str(input())
+
+# calculate answer
+answer = n[::-1]
+
+# print answer
+print(answer)
+
+FLAG: HTB{r3VerS4l?_wElL_1_n3vEr_d1f7d3e363aab437c73f550aaedd6332}
