@@ -1,3 +1,51 @@
 sugar free candies
 For years, strange signals pulsed through the air on the eve of October 31st. Some said it was the voice of an ancient witch, others believed it was a message from something far darker. A cryptic message, scattered in three parts, was intercepted by a daring group of villagers. Legend spoke of a deal made between the witch and a shadowy figure, but the true intent of their secret could only be revealed by those brave enough to decipher it before midnight, when the veil between worlds would thin.
 
+This one took a bit of time to figure out what to do.. Looking at the code i realized that first and foremost i need
+to take a better look at details.. By looking at the code i see that the FLAG is floor divisioned with 3, meaning
+the flag is chopped up into 3 long variables. Example of how this would look FLAG = [12344, 12333, 54323]
+
+Now understanding this process of how the flag is handled is cruical to understanding how to decrypt this. Looking at the 
+v1, v2, v3, v4 variables i can see that v1,v2,v3 is powered with 3 and 2 on the individiual chopped off longs (cnd1, cnd2, cnd3)
+Now these variables are very familiar with something i did at school, which is substition math. Now these longs are very long
+and big numbers and my brain is too small to comprehend this math or i am just lazy, either or ;P
+
+I'll be using this amazing module from SymPy which can solve this mathemathical shit for me and do the calculation.
+I used ChatGPT to tell me how to actually write the code for SymPy since i have never used this module before.
+
+Code: 
+"""from sympy import symbols, Eq, solve
+
+# Declare cnd1, cnd2, and cnd3 as symbolic variables
+cnd1, cnd2, cnd3 = symbols('cnd1 cnd2 cnd3')
+
+# Define the equations based on v1, v2, and v3
+v1 = cnd1**3 + cnd3**2 + cnd2
+v2 = cnd2**3 + cnd1**2 + cnd3
+v3 = cnd3**3 + cnd2**2 + cnd1
+
+# Assume you have values for v1, v2, and v3
+v1_val = v1_long  # replace with actual value
+v2_val = v2_long  # replace with actual value
+v3_val = v3_long  # replace with actual value
+
+# Set up the equations
+eq1 = Eq(v1, v1_val)
+eq2 = Eq(v2, v2_val)
+eq3 = Eq(v3, v3_val)
+
+# Solve the system of equations
+solution = solve([eq1, eq2, eq3], (cnd1, cnd2, cnd3))
+
+print(solution)"""
+
+solution = [(1612993708938936929835517754497931126786454632, 2260690199455691264676123410341531247524997487, 2463132351713367737738737327711828586109296509)]
+string = ''
+for i in range(3):
+    long = solution[0][i]
+    bytes = long_to_bytes(long)
+    string += bytes.decode()
+
+print(string)
+
+FLAG: HTB{__protecting_the_secret_in_equations_is_not_secure__}
