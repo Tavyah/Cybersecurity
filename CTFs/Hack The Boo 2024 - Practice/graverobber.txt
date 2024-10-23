@@ -1,0 +1,64 @@
+Graverobber
+We're breaking into the catacombs to find a rumoured great treasure - I hope there's no vengeful spirits down there...
+
+
+First thing i do is check what filetype this is, by using an online tool to identify filetypes.
+It tells me that it is a ELF file, which i have never come across before, so a quick googling and I find that
+I can use a tool called readelf in my linux virtual machine
+
+So now i'm just looking at the manual of readelf, trying to just display info, take a look what i see and you know, dig around :p
+I read on stackoverflow that constant strings are stored in .rodata (obv i'm googling this), so i figure out how to read the .rodata
+By using the command: readelf -S robber
+I can see the different sections, now .rodata is one of the sections and to access it, i'll use the flag -p which stands for string-dump
+So what I am trying to do is display the strings of .rodata
+I use the command: readelf -p 16 robber
+The .rodata has the section number 16
+
+The dump i get from .rodata
+String dump of section '.rodata':
+  [     8]  We took a wrong turning!
+  [    28]  We found the treasure! (I hope it's not cursed)
+
+Since i am not familiar with ELF files, i just take a guess and see if i get anything from section 28 since I am thinking that maybe since the treasure is there.
+It's a wrong turn.. xD so now i just take another look at the different sections and see a section named .data
+I dump the .data strings which is section number 24 and... voila!
+
+The dump from the section .data
+
+$ readelf -p 24 robber
+
+String dump of section '.data':
+  [     8]  (@
+  [    20]  H
+  [    24]  T
+  [    28]  B
+  [    2c]  {
+  [    30]  b
+  [    34]  r
+  [    38]  3
+  [    3c]  4
+  [    40]  k
+  [    44]  1
+  [    48]  n
+  [    4c]  9
+  [    50]  _
+  [    54]  d
+  [    58]  0
+  [    5c]  w
+  [    60]  n
+  [    64]  _
+  [    68]  t
+  [    6c]  h
+  [    70]  3
+  [    74]  _
+  [    78]  s
+  [    7c]  y
+  [    80]  s
+  [    84]  c
+  [    88]  4
+  [    8c]  l
+  [    90]  l
+  [    94]  5
+  [    98]  }
+
+FLAG: HTB{br34k1n9_d0wn_th3_sysc4ll5}

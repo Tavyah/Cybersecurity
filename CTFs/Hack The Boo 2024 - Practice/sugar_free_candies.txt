@@ -13,6 +13,9 @@ and big numbers and my brain is too small to comprehend this math or i am just l
 I'll be using this amazing module from SymPy which can solve this mathemathical shit for me and do the calculation.
 I used ChatGPT to tell me how to actually write the code for SymPy since i have never used this module before.
 
+The rest of the code was made by me and is just decoding the bytes that i found with the long_to_bytes function from Crypto module.
+It's the reversal function of bytes_to_long() from Crypto module
+
 Code: 
 """from sympy import symbols, Eq, solve
 
