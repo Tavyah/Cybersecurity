@@ -1,0 +1,35 @@
+Replacement
+
+A cursed spell has altered a scroll, changing key letters. Replace the haunted letter with a random one to break the curse!
+
+Task:
+Given a string, a letter in the string and a random letter, replace all instances of the first letter with the latter.
+
+Example
+Input
+Input String: Test me
+Replace: e
+Replace with: K
+
+Output
+TKst mK
+
+This exercise I is pretty straight forward, all you gotta do is take in the inputs
+And then replace letters with the replacement letter
+There is a string function for this in Python, that allows us to replace letters in a string
+replace() function
+
+
+Code:
+# take in the number
+n = str(input())
+replace = str(input())
+replace_with = str(input())
+
+n = n.replace(replace, replace_with)
+
+answer = n
+# print answer
+print(answer)
+
+FLAG: HTB{g0tTa_r3pLacE_th3_sTR1nG!!_901827233542ce2ba14798b4e8744cff}
