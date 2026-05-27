@@ -1,0 +1,40 @@
+SpookyPass
+All the coolest ghosts in town are going to a Haunted Houseparty - can you prove you deserve to get in?
+
+This is also a ELF file, so I will be using readelf to look through the file.
+Now that I did already do Graverobber CTF, i kinda already had a thought to check the same place :p
+
+readelf -S pass
+
+section number 24 is .data and will be using the flag -p to dump strings of the section
+readelf -p 24 pass  
+
+String dump of section '.data':
+  [     8]  H@
+  [    20]  H
+  [    24]  T
+  [    28]  B
+  [    2c]  {
+  [    30]  u
+  [    34]  n
+  [    38]  0
+  [    3c]  b
+  [    40]  f
+  [    44]  u
+  [    48]  5
+  [    4c]  c
+  [    50]  4
+  [    54]  t
+  [    58]  3
+  [    5c]  d
+  [    60]  _
+  [    64]  5
+  [    68]  t
+  [    6c]  r
+  [    70]  1
+  [    74]  n
+  [    78]  g
+  [    7c]  5
+  [    80]  }
+
+FLAG: HTB{un0bfu5c4t3d_5tr1ng5}

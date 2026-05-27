@@ -1,0 +1,20 @@
+Find Frontdoor
+We've all heard of "backdoors" in software, but what about a "frontdoor"?
+
+I locked the flag behind a super secret code, and even saved on server compute by making the client check the code locally on their own computer!
+
+My security friends mentioned something about "client side validation is bad" or "inspecting elements", but deadlines are deadlines so we're shipping it!
+
+See the webste at: findfrontdoor.hkn:8080
+
+NOTE:
+Create a user and find the VPN and Browser LABs on Campfire Labs
+
+Solution:
+I go to the website, click around, nothing important catching my eye in the HTTP POST request. 
+However i read through the elements of the HTML and see the function that is validating the password to enter.
+
+Password in HTML: frontdoorsarereal
+I enter it and voila! A flag!
+
+FLAG: DDC{Fr0ntD00r_0p3n_F0r_Bu5in3ss}

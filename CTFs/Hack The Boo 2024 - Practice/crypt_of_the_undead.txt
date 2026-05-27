@@ -1,0 +1,26 @@
+CryptOfTheUndead
+All my important files have been zombified by the notorious Zombie Cybercrime Gang. Can you lay them to rest and bring my files back?
+
+Checking the filetypes of these files, one is a ELF file, the other is a data file. Not sure..
+Poking around in the ELF file with commands I find this:
+
+readelf -p 16 crypt
+
+String dump of section '.rodata':
+  [     4]  crypt
+  [     a]  Usage: %s file_to_encrypt\n
+  [    25]  .undead
+  [    2d]  error reading file
+  [    40]  error renaming file
+  [    54]  error opening new file
+  [    6b]  chacha.c
+  [    74]  0 != counter[1]
+  [    88]  error: that which is undead may not be encrypted
+  [    c0]  BRAAAAAAAAAAAAAAAAAAAAAAAAAINS!!
+  [    e8]  successfully zombified your file!
+  [   110]  chacha20_block_next
+  [   130]  expand 32-byte k
+
+Telling me that the other file is a chacha20 encrypted file with a 32-bit counter.
+Key?? BRAAAAAAAAAAAAAAAAAAAAAAAAAINS!!
+7f454c46020101000000000000000000

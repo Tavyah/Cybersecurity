@@ -1,0 +1,7 @@
+Commands:
+
+ifconfig 
+
+netdiscover -r <ip>/<ip-range>
+
+example: netdiscover -r 10.0.2.16/24
