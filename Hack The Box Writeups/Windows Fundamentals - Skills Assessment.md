@@ -80,7 +80,9 @@ Questions to answer:
 Question 1
 What is the name of the group that is present in the Company Data Share Permissions ACL by default?
 
-The Company Data folder's ACL permissions by default is something you will come across at step 6. Remember that the ACL is what you can also consider as the Server Message Block protocol (SMB) permissions list. This ACL list contains access control entires (ACEs) and are made up of users and groups, which you can call security principals. We use these groups and users to manage and track access to shared resources.
+The Company Data folder’s ACL permissions are shown during step 6. An Access Control List (ACL) is a list of permissions applied to a shared resource, such as a folder. The ACL contains Access Control Entries (ACEs), which define what users or groups are allowed to access the resource and what actions they can perform.
+
+These users and groups are known as security principals and are used to manage and track access to shared resources.
 
 The answer is "Everyone".
 
@@ -88,7 +90,9 @@ The answer is "Everyone".
 Question 2
 What is the name of the tab that allows you to configure NTFS permissions?
 
-New Technology File System (NTFS) is the default file system for Windows since NT 3.1 and this question was answered during step 6. 
+New Technology File System (NTFS) is the default file system for Windows since NT 3.1 and this question was answered during step 6. NTFS permissions determine what users and groups are allowed to do with files and folders, such as reading, writing, or modifying content.
+
+These permissions are configured through the folder’s ACL and can be managed from the Security tab in the folder properties window.
 
 The answer is "Security".
 
@@ -116,3 +120,9 @@ With the command Get-LocalGroups and Select-Object, you can query out the spesif
 ![Listing HR group and it's SID](image-18.png)
 
 The answer is "S-1-5-21-2614195641-1726409526-3792725429-1007".
+
+
+Outcome of assessment:
+The purpose of this exercise was to understand how Windows permissions enforce access control and prevent unauthorized actions.
+
+By configuring NTFS permissions through Access Control Lists (ACLs), we were able to control which users and groups could access specific resources. This helps prevent situations where a disgruntled employee could access the HR share when they are not supposed to.
