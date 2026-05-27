@@ -77,7 +77,7 @@ To list out services in the command line, you can use the Get-Service command, t
 
 ##Questions to answer:
 
-Question 1
+###Question 1
 What is the name of the group that is present in the Company Data Share Permissions ACL by default?
 
 The Company Data folder’s ACL permissions are shown during step 6. An Access Control List (ACL) is a list of permissions applied to a shared resource, such as a folder. The ACL contains Access Control Entries (ACEs), which define what users or groups are allowed to access the resource and what actions they can perform.
@@ -86,8 +86,7 @@ These users and groups are known as security principals and are used to manage a
 
 The answer is "Everyone".
 
-
-Question 2
+###Question 2
 What is the name of the tab that allows you to configure NTFS permissions?
 
 New Technology File System (NTFS) is the default file system for Windows since NT 3.1 and this question was answered during step 6. NTFS permissions determine what users and groups are allowed to do with files and folders, such as reading, writing, or modifying content.
@@ -96,14 +95,14 @@ These permissions are configured through the folder’s ACL and can be managed f
 
 The answer is "Security".
 
-Question 3
+###Question 3
 What is the name of the service associated with Windows Update?
 
 Using the command Get-Service, you can list out the service for Windows Update and its relevant information, this is done in step 8.
 
 The answer is "wuauserv".
 
-Question 4
+###Question 4
 List the SID associated with the user account Jim you created.
 
 By using commands Get-LocalUser and Select-Object, you can query out the spesific name Jim and his SID. 
@@ -113,7 +112,7 @@ The reason I have "Select-Object Name,SID", the name queried twice is only becau
 
 The answer is "S-1-5-21-2614195641-1726409526-3792725429-1006".
 
-Question 5
+###Question 5
 List the SID associated with the HR security group you created.
 
 With the command Get-LocalGroups and Select-Object, you can query out the spesific name HR and the groups SID. 
