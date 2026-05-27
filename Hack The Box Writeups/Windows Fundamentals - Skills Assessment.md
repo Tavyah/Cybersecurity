@@ -1,9 +1,9 @@
-Skills Assessment - Windows Fundamentals
+#Skills Assessment - Windows Fundamentals
 
-Introduction:
+##Introduction:
 Inlanefreight recently had an incident where a disgruntled employee in marketing accessed an internally hosted HR share and deleted several confidential files & folders. Thankfully, the IT team had good backups and restored all of the deleted data. There are now concerns that this disgruntled employee was able to access the HR share in the first place. After performing a security assessment, you have found that the IT team may not fully understand how permissions work in Windows. You are conducting training and a demonstration to show the department good security practices with file sharing in a Windows environment as well as viewing services from the command line to check for any potential tampering.
 
-Steps to demonstrate:
+##Steps to demonstrate:
 1. Creating a shared folder called Company Data
 
 First thing is to connect to the target machine that we are going to make the folder at, this we will do by using the Remote Desktop Protocol (RDP). Connecting via command line on our pwnbox, by using the command:
@@ -75,7 +75,7 @@ To list out services in the command line, you can use the Get-Service command, t
 ![Listing the Windows Update service](image-16.png)
 
 
-Questions to answer:
+##Questions to answer:
 
 Question 1
 What is the name of the group that is present in the Company Data Share Permissions ACL by default?
@@ -122,7 +122,7 @@ With the command Get-LocalGroups and Select-Object, you can query out the spesif
 The answer is "S-1-5-21-2614195641-1726409526-3792725429-1007".
 
 
-Outcome of assessment:
+##Outcome of assessment:
 The purpose of this exercise was to understand how Windows permissions enforce access control and prevent unauthorized actions.
 
 By configuring NTFS permissions through Access Control Lists (ACLs), we were able to control which users and groups could access specific resources. This helps prevent situations where a disgruntled employee could access the HR share when they are not supposed to.
