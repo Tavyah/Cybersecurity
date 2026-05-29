@@ -27,7 +27,7 @@ In what directory can the cmd executable be found? (just the folder name as answ
 First we will connect to the target machine by using the following command: ssh htb-student@{IP_ADDRESS}
 
 As you open up the session, you will notice a path in the top of the command line console.
-![Path on top of console](image-19.png)
+![Path on top of console](/Pictures/image-19.png)
 
 The answer is "system32".
 
