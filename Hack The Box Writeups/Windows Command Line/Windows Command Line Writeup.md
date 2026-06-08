@@ -203,11 +203,24 @@ It's not a good idea to only know one way to gather information, escpially if th
 ![systeminfo command and output](image.png)
 
 #### Examining the System
-#### Hostname Output
-#### Ver Output
+If you need to retrieve some basic system information such as hostname or OS version, you can use the commands **hostname** and **ver**.
+
+![hostname](image-3.png)
+![ver](image-4.png)
+
 #### Scoping the Network
-#### Ipconfig Without Parameters
-#### Utilizing ARP to Find Additional Hosts
+You can use the command **ipconfig** to gather information about some basic networking information of our target. This will help us understand how our target is connected and what devices it can access across the network - this is a invaluable tool in our arsenal as an attacker. The ipconfig command displays all current TCP/IP network configurations for the machine.
+
+![ipconfig](image-2.png)
+
+If you use Ipconfig without parameters, we get network information such as Domain Name, IPv4 Address, Subnet Mask and Default Gateway.
+By using **ipconfig /all** it will provide us with a fully comprehensive listing of every network adapter attached to the system and additional information, including the physical address of each adapter (MAC Address), DHCP settings and DNS servers.
+
+If you need information about what hosts our target has come into contact with, use the command **arp**.
+Arp displays the contents and entries contained within the Address Resolution Protocol (ARP) cache. You can also use this command to modifiy the table entries. 
+
+![arp /a](image-1.png)
+
 #### Understanding Our Current User
 #### Checking Out Our Privileges
 #### Investigating Groups
