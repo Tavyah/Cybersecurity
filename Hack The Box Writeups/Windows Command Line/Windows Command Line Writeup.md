@@ -27,7 +27,7 @@ In what directory can the cmd executable be found? (just the folder name as answ
 First we will connect to the target machine by using the following command: ssh htb-student@{IP_ADDRESS}
 
 As you open up the session, you will notice a path in the top of the command line console.
-![Path on top of console](/Pictures/image-19.png)
+![Path on top of console](image-19.png)
 
 The answer is "system32".
 
@@ -168,3 +168,63 @@ The answer is "type".
 What command can be used to make the 'apples' directory? (full command as answer, not the alias)
 
 The answer is "mkdir apples".
+
+## Gathering System Information
+
+Gathering system information aka host enumeration
+
+The goal of host enumeration is to provide a overall picture of the target host, its environment, and how it interacts with other systems across the network.
+
+The first question to ask ourselves is: "How do we know what to look for?"
+
+To answer this question, we need to have a basic understanding of all the different types of information available to us on a system.
+
+![Types of information](info.png)
+
+![Description of types of information](info_descri.png)
+
+During enumeration, ask yourselves these questions:
+- What system information can we pull from our target host?
+- What other system(s) is our target host interacting with over the network?
+- What user account(s) do we have access to, and what information is accessible from the account(s)?
+
+Gathering all the information we can on a system or environment should be prioritized over exploiting the system, to avoid writing the system off as not vulnerable or completetly patched. Take your time gathering all the info needed.
+
+### How to get this information?
+
+#### Casting a Wide Net
+Use the command **systeminfo** to find information about the host, such as hostname, IP address(es), domain, hotfixes that have been installed and much more. This is valuable information for a sysadmin when trying to diagnose issues.
+
+For a hacker, this a good way to get a lay of the land while leaving a minimal footprint. Running one command is always better than running multiple commands to get the same information. We are less likely to be detected this way. Gathering information about OS version, hotfixes installed and OS build version can quickly help us determine if the host is vulnerable to an exploit through a Google or ExploitDB search.
+
+#### Systeminfo Output
+It's not a good idea to only know one way to gather information, escpially if they are monitored or tracked more closely. That is why we need multiple ways to gather the required information while staying under the radar.
+
+![systeminfo command and output](image.png)
+
+#### Examining the System
+#### Hostname Output
+#### Ver Output
+#### Scoping the Network
+#### Ipconfig Without Parameters
+#### Utilizing ARP to Find Additional Hosts
+#### Understanding Our Current User
+#### Checking Out Our Privileges
+#### Investigating Groups
+#### Investigating Other Users/Groups
+#### Net User
+#### Net Group/Localgroup
+#### Exploring Resources on the Network
+#### Net Share
+#### Net View
+#### Piecing Things Together
+
+### Question 1
+What command will output verbose system information such as OS configuration, security info, hardware info, and more?
+
+The answer is "
+
+### Question 2
+Access the target host and run the 'hostname' command. What is the hostname?
+
+The answer is "
