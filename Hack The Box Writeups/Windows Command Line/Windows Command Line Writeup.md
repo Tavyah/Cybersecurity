@@ -271,7 +271,7 @@ Net view will display any shared resources the host you are issuing the command 
 #### Piecing Things Together
 Now you know  how to extracts tons of information, but keep in mind that this is quite noisy, and will most likely be noticed by anyone semi-competent. As it stands, we are writing tons of logs, leaving traces across multiple hosts and have little to no insight into what their Endpoint Dectection and Response (EDR) and Network Intrustion Detection System (NIDS) are able to see.
 
-Note: cmd-prompt in a standard environment is not a common thing for a regular user. Administrators somtimes have reasons to use it, but it will be very suspicious if a average user is executing cmd.exe. With that in mind, using net * commands within an environment is not a normal thing either, and can be one way to alert on potential infiltration of a networked host easily. With proper monitoring and logging enabled, we should spot these actions quickly and use them to triage an incident before it gets too far out of hand.
+Note: cmd-prompt in a standard environment is not a common thing for a regular user. Administrators somtimes have reasons to use it, but it will be very suspicious if a average user is executing cmd.exe. With that in mind, using *net \** commands within an environment is not a normal thing either, and can be one way to alert on potential infiltration of a networked host easily. With proper monitoring and logging enabled, we should spot these actions quickly and use them to triage an incident before it gets too far out of hand.
 
 ### Question 1
 What command will output verbose system information such as OS configuration, security info, hardware info, and more?
@@ -281,4 +281,19 @@ The answer is "systeminfo".
 ### Question 2
 Access the target host and run the 'hostname' command. What is the hostname?
 
-The answer is "
+The answer is "ICL-WIN11".
+
+## Finding Files and Directories
+
+### Where Command
+Command **where** can search for files in our environment variable path. If you use *where calc.exe* it will show us the path to where the file is, however it only works because calc.exe is in our environment path. If you are looking for a file that is not in the environment path, you can use the prefix */R*, this prefix will specify which directory to search for and will dig through all directories within that path.
+
+![where command](image-11.png)
+
+![recursive where](image-12.png)
+
+Can also use wildcard *\** when searching.
+
+![wildcard where](image-13.png)
+
+### Find Command
