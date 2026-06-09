@@ -310,3 +310,9 @@ Prefix */I* - ignore case sensitivity
 ### Findstr Command
 Is similiar to find command but it searches through files but for patterns instead. It will look for anything matching a pattern, regex value, wildcards and more. *Findstr == grep* command for Linux, kinda.
 
+### Evaluating and Sorting Files
+
+Commands **comp**, **fc** and **sort** can be used to evaluate files and compare them against each other.
+
+### Comp Command
+Comp will
