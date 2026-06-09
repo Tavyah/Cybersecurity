@@ -222,20 +222,61 @@ Arp displays the contents and entries contained within the Address Resolution Pr
 ![arp /a](image-1.png)
 
 #### Understanding Our Current User
-#### Checking Out Our Privileges
-#### Investigating Groups
+To figure out your current user, command **whoami**.
+
+Whoami displays user, group and privilege information for the current logged in user.
+
+The output of this command is the current domain and user named of the logged in account. Note: If the current user is not a domain-joined account, the NetBIOS name will be provided instead.
+![whoami](image-5.png)
+
+To check for the user's security privileges on the system, the command **whoami /priv** can be used. This is a set of basic permissions, but if there is any misconfigurations here, that could be used to escalate priviledges.
+
+![whoami /priv](image-6.png)
+
+You can also check what groups the account is member of by using the command **whoami /groups**. This can provide information about what groups the account is part of, default groups and more importantly custom groups which the user have access to.
+
+![whoami /groups](image-7.png)
+
+Command **whoami /all** can also be used to provide alot more information, like user, groups and priviledges.
+
 #### Investigating Other Users/Groups
-#### Net User
-#### Net Group/Localgroup
+Most environments have machines that are on domain-joined networks, which means that anyone can log into any physical host on the network without requiring a local account on the machine. We can use this to our advantage to scope out what users have accessed our current host to see if we could access other accounts. We can use the command **net** to do this.
+
+Net user allows us to display a list of all users on a host, information on a specific user and to create or delete users.
+
+![net user](image-8.png)
+
+We can also look at what groups exist across the network by using commands **net group** or **net localgroup**.
+Net group will display any groups that exist on the host from which we issued the command, create and delete groups and add or remove users from groups. It will also display domain group information if the host is joined to the domain. Net group must be run against a domain server such as the DC, while net localgroup can be run against any host to show us the groups it contains.
+
+![net group vs net localgroup](image-9.png)
+
 #### Exploring Resources on the Network
-#### Net Share
-#### Net View
+You can also gather information about the shares on a server that the user has access to and keep yourself able to log in again if you lose an established connection.
+
+The command **net share** allows us to display info about the shared resources on the host and to create new shared resources.
+
+![net share](image-10.png)
+
+In the picture above you can see a share named Records, this can be potentially intersting informatioon for us to enumerate. If you do find a share like this we need to keep track of the following:
+- Do we have the proper permissions to access this share?
+- Can we read, write, and execute files on the share?
+- Is there any valuable data on the share?
+
+Shares are also good for hosting anything and lateral movement across hosts, if you need to be sneaky, you can drop a payload onto the share to enable movement around other hosts on the network.
+
+If you don't need to look at shares but wish to search the environment broadly, use command **net view**.
+Net view will display any shared resources the host you are issuing the command against knows of. This includes domain resources, shares, printers and more.
+
 #### Piecing Things Together
+Now you know  how to extracts tons of information, but keep in mind that this is quite noisy, and will most likely be noticed by anyone semi-competent. As it stands, we are writing tons of logs, leaving traces across multiple hosts and have little to no insight into what their Endpoint Dectection and Response (EDR) and Network Intrustion Detection System (NIDS) are able to see.
+
+Note: cmd-prompt in a standard environment is not a common thing for a regular user. Administrators somtimes have reasons to use it, but it will be very suspicious if a average user is executing cmd.exe. With that in mind, using net * commands within an environment is not a normal thing either, and can be one way to alert on potential infiltration of a networked host easily. With proper monitoring and logging enabled, we should spot these actions quickly and use them to triage an incident before it gets too far out of hand.
 
 ### Question 1
 What command will output verbose system information such as OS configuration, security info, hardware info, and more?
 
-The answer is "
+The answer is "systeminfo".
 
 ### Question 2
 Access the target host and run the 'hostname' command. What is the hostname?
