@@ -297,3 +297,16 @@ Can also use wildcard *\** when searching.
 ![wildcard where](image-13.png)
 
 ### Find Command
+The command **find** is used to search for text strings within a file or files. You can also pipeline the output in terminal to use find, but the command is limited to when it comes to using wildcard patterns in its matching. 
+
+![find command](image-14.png)
+
+Prefix */V* - a NOT clause
+Prefix */N* - display line numbers
+Prefix */I* - ignore case sensitivity
+
+![using find prefixes](image-15.png)
+
+### Findstr Command
+Is similiar to find command but it searches through files but for patterns instead. It will look for anything matching a pattern, regex value, wildcards and more. *Findstr == grep* command for Linux, kinda.
+
