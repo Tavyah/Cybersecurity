@@ -1,0 +1,15 @@
+crt.sh - https://cybersectools.com/tools/crt-sh
+shodan search engine - https://www.shodan.io/
+rengine. reconnaissance framework for web apps - https://github.com/yogeshojha/rengine
+burp suite pro with extensions like Autorize, Taborator, JSON Web Tokens, Turbo Intruder, CMS Scanner and CSRF Scanner.
+nuclei. vulnerability scanner - https://github.com/projectdiscovery/nuclei
+gitrob - https://github.com/michenriksen/gitrob
+shhgit - https://github.com/eth0izzle/shhgit
+linkfinder - https://github.com/GerbenJavado/LinkFinder
+
+
+CLI Tools:
+- ffuf
+- dirb
+- nmap
+- searchsploit

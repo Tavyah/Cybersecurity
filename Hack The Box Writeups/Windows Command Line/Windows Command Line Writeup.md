@@ -315,4 +315,129 @@ Is similiar to find command but it searches through files but for patterns inste
 Commands **comp**, **fc** and **sort** can be used to evaluate files and compare them against each other.
 
 ### Comp Command
-Comp will
+Comp will check each byte within two files looking for differences and then displays where they start. Showed by default in decimal format.
+*/A* - to see in ASCII format
+*/L* - provides line numbers
+
+![comp command](image-16.png)
+
+Can use comp command to see if files, scripts, executables have been modified.
+
+![comparing two files that are different](image-17.png)
+
+### FC Command
+FC will show which lines are different, not just an individial character or byte that is different on each line.
+*/N* - to see ASCII format and print the line numbers
+
+![FC command](image-18.png)
+
+### Sort Command
+It's important to sort files before comparing to make sure we actually spot the difference, otherwise the comparising will fail and tell us every single line is different.
+
+Input: file, console, pipeline
+Output: file, console or different command
+
+![sort](image-20.png)
+
+*/O* - Sending results to output
+*/unique* - Removes duplicates
+
+![unique sort](image-21.png)
+
+
+### Question 1
+What command can be used to search for regular expression strings from command prompt?
+
+The answer is "findstr".
+
+### Question 2
+Using the skills acquired in this and previous sections, access the target host and search for the file named 'waldo.txt'. Submit the flag found within the file.
+
+To find this answer, first you need to know what command to use for finding files, since we have been good hackers and taken really good notes, you will remember that the command **where** is the one we will be using. 
+
+First thing I try is **where waldo.txt**, and no output. Which means that the text file is not in the environmental path, so that means we gotta use the prefix /R to search through chosen directory and it's sub directories.
+
+Next ill try the command **where /R C:\Users\ waldo.txt**, reason for this command is that most likely it's in one of the user folders and do not make any assupmtion that it might be on the *htb-student* , so I'll search all the user folders and voila. Found the file in the path: C:\Users\MTanaka\Favorites\waldo.txt
+
+Next thing I would like to do is to find the content of the file, so I'll use the command **cat** to do so. Command used: **cat C:\Users\MTanaka\Favorites\waldo.txt**, and there we have the flag.
+
+The answer is "RmxhZ3MgYXJlbid0IGhhcmQgdG8gZmluZCBub3csIHJpZ2h0Pw==".
+
+## Environment Variables
+Environment variables are settings that often applied globally to our hosts. Can be found on Windows, macOS and Linux hosts. Function differently on each OS. We use them for speeding up how application functions and reference data, to run scripts. On Windows host, environmental variables are NOT case sensitive, but can't start with an *=* or *number*. You call them like this:
+**%I_AM_A_ENV_VAR%**
+
+It's normal to see them as UPPERCASE letters and underscore to link each word (especially the built in ones).
+
+### Variable Scope
+Variable Scope
+In this context, Scope is a programming concept that refers to where variables can be accessed or referenced. 'Scope' can be broadly separated into two categories:
+
+#### Global:
+Global variables are accessible globally. In this context, the global scope lets us know that we can access and reference the data stored inside the variable from anywhere within a program.
+#### Local:
+Local variables are only accessible within a local context. Local means that the data stored within these variables can only be accessed and referenced within the function or context in which it has been declared.
+
+### Setting a local variable
+Command **set <name_of_variable>=<content_of_variable>**
+
+Example:
+![setting a local variable](image-22.png)
+
+### Windows Environmental Variables
+Windows envrionmental variables are defined into different scopes: System , User and Process. The Process scope is considered to be a subsystem of System and User scope.
+
+=====================================================================================================================================================
+**Scope	            Description	    Permissions Required to Access	    Registry Location**
+=====================================================================================================================================================
+System (Machine)	The System scope contains environment variables defined by the Operating System (OS) and are accessible globally by all users and accounts that log on to the system. The OS requires these variables to function properly and are loaded upon runtime.	                        
+
+Local Administrator or Domain Administrator	        HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment
+=====================================================================================================================================================
+User	            The User scope contains environment variables defined by the currently active user and are only accessible to them, not other users who can log on to the same system.	
+
+Current Active User, Local Administrator, or Domain Administrator	                    HKEY_CURRENT_USER\Environment
+
+=====================================================================================================================================================
+Process	            The Process scope contains environment variables that are defined and accessible in the context of the currently running process. Due to their transient nature, their lifetime only lasts for the currently running process in which they were initially defined. They also inherit variables from the System/User Scopes and the parent process that spawns it (only if it is a child process).	
+
+Current Child Process, Parent Process, or Current Active User	                    None (Stored in Process Memory)
+=====================================================================================================================================================
+
+#### Displaying a environmental variable
+You can use commands **set** and **echo** to view the environmental variable, by simply using the command and adding the name of the variable.
+
+**set %PATH%** or **echo %PATH**
+
+### Managing Environment Variables
+Now that we have some way to view existing environment variables on our system, we need to be able to create, remove, and manage them from the comfort and safety of our prompt. We have two methods available to us to do so. We can either use set or setx to perform our intended actions.
+
+#### When to Use set Vs. setx
+Both **set** and **setx** are command line utilities that allow us to display, set, and remove environment variables. The difference lies in how they achieve those goals. The set utility only manipulates environment variables in the current command line session. This means that once we close our current session, any additions, removals, or changes will not be reflected the next time we open a command prompt. Suppose we need to make permanent changes to environment variables. In that case, we can use setx to make the appropriate changes to the registry, which will exist upon restart of our current command prompt session.
+
+### Configure environmental variables
+
+#### Setting variable
+Setting variable with **set** command will be part of the **process** scope, so when your exit the cmd and start a new session it wont exists anymore.
+![set command](image-23.png)
+
+Setting variable with **setx** command, you gotta open a new cmd to see that the change have happened.
+![setx command](image-24.png)
+
+#### Editing variable
+To **edit** existing variables, u simply use the commands (set and setx) to "overwrite" the variable.
+
+#### Removing variable
+Simply gotta overwrite these aswell with nothing, to make them be deleted.
+
+Example: **setx SECRET ""**
+
+### Important Environment Variables
+![iev](image-25.png)
+
+Complete list of variables: https://ss64.com/nt/syntax-variables.html
+
+### Question 1
+What variable scope allows for universal access?
+
+The answer is "global".
