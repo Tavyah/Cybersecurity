@@ -441,3 +441,5 @@ Complete list of variables: https://ss64.com/nt/syntax-variables.html
 What variable scope allows for universal access?
 
 The answer is "global".
+
+## Managing Services
