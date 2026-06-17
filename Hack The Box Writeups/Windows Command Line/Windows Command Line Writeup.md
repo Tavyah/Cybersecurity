@@ -1,5 +1,8 @@
 # Windows Command Line
+This module is all about learning how to use CMD and PowerShell.
 
+# CMD
+The next chapters are about the Command Prompt, afterwards we will take a look at Powershell.
 ## Command Prompt Basics
 
 Insecure and not recommended:
@@ -443,3 +446,158 @@ What variable scope allows for universal access?
 The answer is "global".
 
 ## Managing Services
+SC is a Windows executable utility that allows us to query, modify, and manage host services locally and over the network.
+
+Being able to query services for information such as the process state, process id (pid), and service type is a valuable tool to have in our arsenal as an attacker. We can use this to check if certain services are running or check all existing services and drivers on the system for further information.
+
+Checking which servies are currently actively running on the system.
+Command: **sc query type= service** 
+
+Query specific service
+Command: **sc query <name_of_service>**
+
+Stopping a service:
+Command: **sc stop <name_of_service>**
+
+Note: attempting to stop an elevated service like this is not the best way of testing permissions, as this will likely lead to us getting caught due to the traffic that will be kicked up from running a command like this.
+
+As an attacker, learning the restrictions behind what certain accounts have access or lack of access to is very important because blindly trying to stop services will fill the logs with errors and trigger any alerts showing that a user with insufficient privileges is trying to access a protected process on the system. This will catch the blue team's attention to our activities and begin a triage attempt to kick us off the system and lock us out permanently.
+
+![stopping service](image-26.png)
+
+It is important to note that not all services will respond to these requests, regardless of our permissions, especially if other running programs and services depend on the service we are attempting to stop.
+
+Starting a service:
+Command: **sc start <name_of_service>**
+
+### Modifying services
+You can do alot of things with services, trying to modify existing services to serve the purpose we want them to do. To configure services we must use the config parameters: https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sc-config in *sc*. We can configure the values regardless if the service is running or not.
+
+All changes made with this command are reflected in the Windows registry as well as the database for Service Control Manager (SCM). All changes to an existing service will only fully update **after restarting the service**.
+
+Note: It is important to be aware that modifying existing services can effectively take them out permanently as any changes made are recorded and saved in the registry, which can persist on reboot. Please exercise caution when modifying services in this manner.
+
+### Example: Taing out Windows Update feature
+Windows 10 and above relies on these following services: 
+![services required to take out windows update](image-27.png)
+
+You can see on the picture that wuauserv is not running currently, but the bits are. So we will try to stop it.
+
+Step 1: Query the services
+![step 1](image-28.png)
+
+Step 2: Stop the BITS service
+Command: **sc stop bits**
+
+Step 3: Modify the start type of both the services
+![modifying the start type](image-29.png)
+
+We can see the confirmation that both services have been modified successfully. This means that when both services attempt to start, they will be unable to as they are currently disabled. As previously mentioned, this change will persist upon reboot, meaning that when the system attempts to check for updates or update itself, it cannot do so because both services will remain disabled. We can verify that both services are indeed disabled by attempting to start them.
+
+Step 4: Verifying services are disabled
+![verifying disabled services](image-30.png)
+
+Note: To revert everything back to normal, you can set start= auto to make sure that the services can be restarted and function appropriately.
+
+We have verified that both services are now disabled, as we cannot start them manually. Due to the changes made here, Windows cannot utilize its updating feature to provide any system or security updates. This can be very beneficial to an attacker to ensure that a system can remain out of date and not retrieve any updates that would inhibit the usage of certain exploits on a target system. Be aware that by doing this in this manner, we will likely be triggering alerts for this sort of action set up by the resident blue team. This method is not quiet and does require elevated permissions in a lot of cases to perform.
+
+### Other ways to query services
+- Tasklist, a command line tool that gives us a list of currently running processes on a local or remote host.
+
+Providing a list of running services under each process on the system.
+Command: **tasklist /svc**
+
+![list with running services](image-31.png)
+
+- Net start, command that allows us to list all of the current running services on a system.
+
+Commands: **net start**, **net stop**, **net pause**, **net continue**
+
+![net start command](image-32.png)
+
+- WMIC, Windows Management Instrumentation Command (WMIC) retrieves a vast range of information from our local host or hosts across the network.
+
+Note: This is a versatile command, alot of other things u can do with it.
+
+To list all services existing on our system and information on them.
+Command: **wmic service list brief**
+
+![wmic command](image-33.png)
+
+Note: It is important to be aware that the WMIC command-line utility is currently deprecated as of the current Windows version. As such, it is advised against relying upon using the utility in most situations. You can find further information regarding this change by following this: https://learn.microsoft.com/en-us/windows/win32/wmisdk/wmic.
+
+
+### Question 1
+What command string will stop a service named 'red-light'? (full command as the answer)
+
+The answer is "sc stop red-light".
+
+### Question 2
+What Windows executable will allow us to create, query, and modify services on a host?
+
+The answer is "sc".
+
+## Working With Scheduled Tasks
+Scheduled tasks are an excellent way for administrators to ensure that tasks they want to run regularly happen, but they are also an excellent persistence point for attackers
+
+### What are scheduled tasks?
+The Task Scheduler allows us as admins to perform routine tasks without having to kick them off manually. The scheduler will monitor the host for a specific set of conditions called triggers and execute the task once the conditions are met.
+
+**Story Time:** *On several engagements, while pentesting an enterprise environment, I have been in a position where I landed on a host and needed a quick way to set persistence. Instead of doing anything crazy or pulling down another executable onto the host, I decided to search for or create a scheduled task that runs when a user logs in or the host reboots. In this scheduled task, I would set a trigger to open a new socket utilizing PowerShell, reaching out to my Command and Control infrastructure. This would ensure that I could get back in if I lost access to this host. If I were lucky, when the task I chose ran, I might also receive a SYSTEM-level shell back, elevating my privileges at the same time. It quickly ensured host access without setting off alarms with antivirus or data loss prevention systems.*
+
+#### Triggers That Can Kick Off a Scheduled Task
+- When a specific system event occurs.
+- At a specific time.
+- At a specific time on a daily schedule.
+- At a specific time on a weekly schedule.
+- At a specific time on a monthly schedule.
+- At a specific time on a monthly day-of-week schedule.
+- When the computer enters an idle state.
+- When the task is registered.
+- When the system is booted.
+- When a user logs on.
+- When a Terminal Server session changes state.
+
+### Schtasks command
+
+Display scheduled tasks
+![query syntax](image-34.png)
+
+Command: **SCHTASKS /Query /V /FO list**
+![schtasks query](image-35.png)
+
+Create new scheduled tasks
+![schtasks create](image-36.png)
+
+Creating scheduled task, at a minimum specify the following:
+- /create : to tell it what we are doing
+- /sc : we must set a schedule
+- /tn : we must set the name
+- /tr : we must give it an action to take
+
+Creation of new task
+![create task](image-37.png)
+
+Changing the properties of a scheduled task
+![change syntax](image-38.png)
+
+Deleting a scheduled task(s)
+![delete syntax](image-39.png)
+
+![delete command wihtout /F](image-40.png)
+If you use the /F option, u wont be prompted.
+
+### Question 1
+True or False: A scheduled task can be set to run when a user logs onto a host?
+
+The answer is "True".
+
+### Question 2
+Access the target host and take some time to practice working with Scheduled Tasks. Type COMPLETE as the answer when you are ready to move on.
+
+The answer is "COMPLETE". **Note: The point of this question is to make sure u can create, modify, query and delete schedules. Do not skip this to simply just complete the step.**
+
+# Powershell
+The next chapters are about how to use and benefit from Powershell.
+
+## TITLE HERE
